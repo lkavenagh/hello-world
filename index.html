@@ -1,19 +1,23 @@
 <!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<HTML>
-   <HEAD>
-   <head>
-      <style>
-      body {background-color:white;}
-      h1   {font-size:30pt;}
-      h2   {color:blue;}
-      p    {margin-left:50px;}
-      </style>
-      <TITLE>
-         A Small Hello 
-      </TITLE>
-   </HEAD>
-<BODY>
-   <h1>Hi</h1>
-   <p>This is very minimal "hello world" HTML document.</p> 
-</BODY>
-</HTML>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<title>
+			Hello, world!
+		</title>
+	</head>
+	<body>
+		<h1>Hello, world!</h1>
+		<p>My name is Luke Kavenagh. This is a website.</p> 
+		<div class="poll"> 
+			<form method="post" action="poll_results.asp">
+				<b>Poll</b><p>
+				<b>How far should Luke run today?</b><p>
+				<input type="radio" name="answer" value="1">Nothing<BR>
+				<input type="radio" name="answer" value="2">6 miles<BR>
+				<input type="radio" name="answer" value="3">12 miles<BR>
+				<input type="submit" name="submit" value="Submit">
+			</form>
+		</div>
+	</body>
+</html>
