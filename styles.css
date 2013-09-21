@@ -1,0 +1,19 @@
+body	{
+	background-color:black;
+	color:white;
+	font-size:30pt;
+}
+h1		{
+	font-size:30pt;
+	color:white;
+}
+p		{
+	margin-left:50px;
+	color:white;
+}
+
+.poll {
+	color:black;
+	background-color:Silver;
+	font-size:12pt;
+}
