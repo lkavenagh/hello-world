@@ -2,7 +2,7 @@
 <html>
 	<body>
 		<%
-			response.write("Poll results!")
+			response.write("This is an ASP script!")
 		%>
 	</body>
 </html>
