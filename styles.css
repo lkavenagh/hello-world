@@ -1,19 +1,28 @@
 body	{
-	background-color:black;
-	color:white;
-	font-size:30pt;
+	background-color:Silver;
+	color:black;
+	font-size:12pt;
 }
 h1		{
 	font-size:30pt;
-	color:white;
+	color:black;
+	text-align:center;
+}
+h2		{
+	font-size:14pt;
+	color:purple;
+	text-align:center;
+	font-style:"Times New Roman";
+	font-weight:bold;
 }
 p		{
 	margin-left:50px;
-	color:white;
+	color:purple;
 }
 
 .poll {
 	color:black;
-	background-color:Silver;
+	background-color:white;
 	font-size:12pt;
+	overflow:hidden;
 }
