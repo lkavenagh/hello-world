@@ -1,28 +1,71 @@
-body	{
-	background-color:Silver;
-	color:black;
-	font-size:12pt;
+body {
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	background-color:silver;
+	font-size:15pt;
 }
-h1		{
-	font-size:30pt;
+
+h1{
+	font-size:300%;
 	color:black;
 	text-align:center;
+	margin-top:10px;
+	margin-bottom:0px;
 }
-h2		{
-	font-size:14pt;
-	color:purple;
+
+h2{
+	font-size:140%;
+	color:blue;
 	text-align:center;
 	font-style:"Times New Roman";
 	font-weight:bold;
 }
-p		{
-	margin-left:50px;
-	color:purple;
+
+p{
+	margin-left:1%;
+	color:black;
+	font-size:130%;
 }
 
 .poll {
-	color:black;
-	background-color:white;
-	font-size:12pt;
+	color:white;
+	background-color:black;
+	font-size:120%;
 	overflow:hidden;
+}
+
+.header{
+	background-color:silver;
+	color:black;
+}
+
+.middle{
+	background-color:silver;
+	color:black;
+	border:1;
+}
+
+.section-break{
+	margin-top:10px;
+}
+
+footer{
+	background-color:gray;
+	color:black;
+	margin-top:25px;
+}
+
+hr{
+	color:black;
+	background-color:black;
+	height:3px;
+	border:1;
+	width:100%;
+}
+
+dl{
+	margin-left:1%;
+	font-weight:bold
 }
