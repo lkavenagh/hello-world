@@ -16,15 +16,25 @@
 		</div>
 		<section>
 		<div class="section-break"></div>
-		<div class="square"><div class="disappearText">Mouse-over here</div><div class="fadeintext">Animation!</div><div class="fadeintextdelay">More animation!</div></div>
+		
+		<div class="square"><div class="disappearText">Mouse-over here</div><div class="fadeintext">Animation!</div><div class="fadeintextdelay">More animation!</div></div><br>
+		
+		<div class="section-break"></div>
+		<div id="statuslabel"> <font color="red">Not connected</font> </div>
+		<div id="tradepricelabel"> Trade price will go here: </div>
+		<div id="tradeprice"> -99 </div><br>
+		<div id="bidpricelabel"> Bid price will go here: </div>
+		<div id="bidprice"> -99 </div><br>
+		<div id="askpricelabel"> Ask price will go here: </div>
+		<div id="askprice"> -99 </div>
 		<div class="middle">
+			<script src="https://socketio.mtgox.com/socket.io/socket.io.js"></script>
+			<script src="./mtgox.js"></script>
 			<p>
 				Things I want to try out here:
 				<dl>
 				<dt>Website API</dt>
 				<dd> - RunKeeper</dd>
-				<dt>Bitcoin price</dt>
-				<dd> - Mt.Gox API</dd>
 				</dl>
 			</p>
 		</div>
