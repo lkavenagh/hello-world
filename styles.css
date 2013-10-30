@@ -24,9 +24,9 @@ h2{
 }
 
 p{
-	margin-left:1%;
 	color:black;
 	font-size:130%;
+	margin-left:5%;
 }
 
 .poll {
@@ -45,10 +45,12 @@ p{
 	background-color:silver;
 	color:black;
 	border:1;
+	margin-left:5%;
 }
 
 .section-break{
 	margin-top:10px;
+	background-color:black;
 }
 
 footer{

@@ -1,19 +1,24 @@
-var conn = io.connect('https://socketio.mtgox.com/mtgox?Currency=USD');
-conn.send({
-	"op":"mtgox.subscribe",
-	"type":"trades"
-});
-conn.send({
-	"op":"mtgox.subscribe",
-	"type":"depth"
-});
-conn.send({
-	"op":"mtgox.subscribe",
-	"type":"ticker"
-});
-document.getElementById("statuslabel").innerHTML = "<font color=green>Connected to Mt.Gox</font>";
+var conn = io.connect('https://socketio.mtgox.com/mtgox');
+
 var date;
 var tradetime;
+
+conn.on('connect', function(data) {
+	document.getElementById("statuslabel").innerHTML = "<font color=green>Connected to Mt.Gox</font>";
+	conn.send({
+	  "op": "mtgox.subscribe",
+	  "type": "ticker"
+	});
+	conn.send({
+	  "op": "mtgox.subscribe",
+	  "type": "depth"
+	});
+	conn.send({
+	  "op": "mtgox.subscribe",
+	  "type": "trade"
+	});
+});
+
 conn.on('message', function(data) {
 	if ('private' === data.op) {
 		if ('trade' === data.private && 'USD' === data.trade.price_currency) {
@@ -33,6 +38,19 @@ conn.on('message', function(data) {
 		}
 	}
 });
+
+conn.on('heartbeat', function(data) {
+	document.getElementById("statuslabel").innerHTML = "<font color=blue>Heartbeat</font>";
+});
+
+conn.on('connecting', function(data) {
+	document.getElementById("statuslabel").innerHTML = "<font color=red>Connecting...</font>";
+});
+
 conn.on('disconnect', function(data) {
 	document.getElementById("statuslabel").innerHTML = "<font color=red>Not connected to Mt.Gox</font>";
+});
+
+conn.on('error', function(data) {
+	document.getElementById("statuslabel").innerHTML = "<font color=red>Error connecting to Mt.Gox</font>";
 });
