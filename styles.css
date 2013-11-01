@@ -23,9 +23,31 @@ h2{
 	font-weight:bold;
 }
 
+h3{
+	font-size:150%;
+	color:Black;
+	margin-left:5%;
+	margin-bottom: 0px;
+	font-style:"Times New Roman";
+	font-weight:bold;
+}
+
 p{
 	color:black;
 	font-size:130%;
+	margin-left:5%;
+}
+
+pc{
+	color:black;
+	font-size:130%;
+	margin-left:5%;
+	font-family:"Courier New";
+}
+
+a{
+	color:white;
+	text-decoration: none;
 	margin-left:5%;
 }
 
@@ -52,6 +74,10 @@ p{
 	margin-top:10px;
 	background-color:black;
 }
+.little-break{
+	margin-top:1px;
+	background-color:silver;
+}
 
 footer{
 	background-color:gray;
@@ -74,7 +100,6 @@ dl{
 
 @-webkit-keyframes colorchange {
 	0% {background: black}
-	50% {background: grey}
 	100% {background: black}
 }
 
@@ -88,42 +113,77 @@ dl{
 }
 
 .square{
+	height: 25px;
+	width: 50px;
+	background: black;
+	margin-left:5%;
+	-webkit-transition:width 0.5s ease-in-out;
+}
+
+.bigsquare{
 	height: 100px;
 	width: 200px;
 	background: black;
-	margin-left:50px;
-	-webkit-transition:width 2s ease-in-out;
+	margin-left:5%;
+	-webkit-transition:width 0.5s ease-in-out;
 }
 
 .fadeintext{
 	color: white;
 	opacity: 0;
+	margin-left:5%;
 }
+
 .fadeintextdelay{
 	color: white;
 	opacity: 0;
+	margin-left:5%;
 }
+
 .disappearText{
 	color: white;
 	opacity: 1;
+	margin-left:5%;
 }
 
 .square:hover  > .fadeintext{
-	-webkit-animation:textappear 1s ease-in-out;
+	-webkit-animation:textappear 0.25s ease-in-out;
+	-webkit-animation-delay: 0.1s;
 	-webkit-animation-fill-mode:forwards;
 }
 
-.square:hover  > .fadeintextdelay{
-	-webkit-animation:textappear 1s ease-in-out;
-	-webkit-animation-delay: 1s;
+.square:onclick  > .fadeintext{
+	-webkit-animation:textappear 0.25s ease-in-out;
+	-webkit-animation-delay: 0.1s;
 	-webkit-animation-fill-mode:forwards;
 }
+
 .square:hover  > .disappearText{
 	-webkit-animation:textdisappear 0.1s ease-in-out;
 	-webkit-animation-fill-mode:forwards;
 }
 
 .square:hover {
+	width:200px;
+	-webkit-animation:colorchange 1s;
+}
+
+.bigsquare:hover  > .fadeintext{
+	-webkit-animation:textappear 2s ease-in-out;
+	-webkit-animation-fill-mode:forwards;
+}
+
+.bigsquare:hover  > .fadeintextdelay{
+	-webkit-animation:textappear 2s ease-in-out;
+	-webkit-animation-delay: 2s;
+	-webkit-animation-fill-mode:forwards;
+}
+.bigsquare:hover  > .disappearText{
+	-webkit-animation:textdisappear 0.1s ease-in-out;
+	-webkit-animation-fill-mode:forwards;
+}
+
+.bigsquare:hover {
 	width:400px;
 	-webkit-animation:colorchange 2s ease-in-out;
 }
