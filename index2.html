@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<style>
-			h1{
+			#flashingtext{
 			font-size:2000%;
 			color:black;
 			text-align:center;
@@ -15,11 +15,26 @@
 			}
 		</style>
 		<title>
-			GIANTS SUCK!
+			JUSTIN IS AWESOME!
 		</title>
 
 	</head>
 	<body>
-		 <h1>GIANTS SUCK! </h1>
+		 <div id="flashingtext">JUSTIN IS AWESOME!</div>
+		 <script>
+			function flashtext() {
+            var tmpColCheck = document.getElementById( "flashingtext" ).style.color;
+
+              if (tmpColCheck === 'silver') {
+                document.getElementById( "flashingtext" ).style.color = 'black';
+              } else {
+                document.getElementById( "flashingtext" ).style.color = 'silver';
+              }
+            } 
+            
+            setInterval(function() {
+                flashtext();
+            }, 50 ); //set an interval timer up to repeat the function
+		</script>
 	</body>
 </html>
