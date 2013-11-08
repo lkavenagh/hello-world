@@ -8,6 +8,7 @@ var results;
 var count;
 
 jQuery(document).ready(function($) {
+	nextImage("http://www.keter.com/files/images/global/themes/7ECC14/product__showcase__loading_animation.gif");
 	$.when(
 		$.ajax({
 			url : q,
@@ -37,7 +38,7 @@ jQuery(document).ready(function($) {
 			if (number>=count-1) {
 				number = 0;
 			};
-	    }, 1500);
+	    }, 2000);
     });
 });
 
@@ -53,7 +54,7 @@ function nextImage($imgurl) {
 	
 	// There is also a result.url property which has the escaped version
 	newImg.src = result;
-	newImg.setAttribute('width', '256px');
+	newImg.setAttribute('width', '325');
 	newImg.setAttribute('height', '200px');
 	
 	imgContainer.appendChild(newImg);

@@ -3,7 +3,7 @@ body {
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
-	background-color:silver;
+	background-color:white;
 	font-size:15pt;
 }
 
@@ -77,12 +77,12 @@ a{
 }
 
 .header{
-	background-color:silver;
+	background-color:white;
 	color:black;
 }
 
 .middle{
-	background-color:silver;
+	background-color:white;
 	color:black;
 	border:1;
 }
@@ -93,11 +93,11 @@ a{
 }
 .little-break{
 	margin-top:1px;
-	background-color:silver;
+	background-color:white;
 }
 
 footer{
-	background-color:gray;
+	background-color:silver;
 	color:black;
 	margin-top:25px;
 }
