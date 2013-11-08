@@ -151,12 +151,6 @@ dl{
 	-webkit-animation-fill-mode:forwards;
 }
 
-.square:onclick  > .fadeintext{
-	-webkit-animation:textappear 0.25s ease-in-out;
-	-webkit-animation-delay: 0.1s;
-	-webkit-animation-fill-mode:forwards;
-}
-
 .square:hover  > .disappearText{
 	-webkit-animation:textdisappear 0.1s ease-in-out;
 	-webkit-animation-fill-mode:forwards;
