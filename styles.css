@@ -36,6 +36,25 @@ p{
 	color:black;
 	font-size:130%;
 	margin-left:5%;
+	display:inline;
+}
+
+pred{
+	color:red;
+	font-size:130%;
+	margin-left:5%;
+}
+
+pgreen{
+	color:green;
+	font-size:130%;
+	margin-left:5%;
+}
+
+pblue{
+	color:blue;
+	font-size:130%;
+	margin-left:5%;
 }
 
 pc{
@@ -66,7 +85,6 @@ a{
 	background-color:silver;
 	color:black;
 	border:1;
-	margin-left:5%;
 }
 
 .section-break{
