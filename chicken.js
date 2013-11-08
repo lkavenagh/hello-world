@@ -1,51 +1,58 @@
-google.load("search", "1");
+var apikey = "AIzaSyA1w6xo6AiJQYhdnkg3UTWcXkoV5YhCXB0";
+var cx = "014292974721206889519:zjwkqhcfjuk";
+var searchterm = "bonchon";
+var q = "https://www.googleapis.com/customsearch/v1?q=" + searchterm + "&searchType=image&cx=" + cx + "&key=" + apikey;
 
 var number;
+var results;
+var count;
 
-function searchComplete(searcher) {
-  // Check that we got results
-  if (searcher.results && searcher.results.length > 0) {
-    // Loop through our results, printing them to the page.
-    var results = searcher.results;
+jQuery(document).ready(function($) {
+	$.when(
+		$.ajax({
+			url : q,
+			dataType : "jsonp",
+			success : function(parsed_json) {
+				results = parsed_json['items'];
+				count = parseInt(parsed_json['queries']['request'][0]['count']);
+			},
+			error : function() {
+				alert("Error");
+			}
+		})
+	).then( function() {
+		number = 0;
+		setInterval( function() {
+	    	$( "#chickenpicture" ).fadeTo('medium', 0, function() {
+	   			nextImage(results[number]['link']);
+	   			$( "#chickenpicture" ).fadeTo('medium',1);
+	   		});
+	   		number++;
+	   		while (results[number]['link'].search(/\(/) > -1) {
+				number++;
+				if (number>=count-1) {
+					number = 0;
+				};
+			}
+			if (number>=count-1) {
+				number = 0;
+			};
+	    }, 1500);
+    });
+});
 
-    number = 0;
-    nextImage(results,number);
-    setInterval( function() {
-    	number++;
-    	if (number==results.length) {
-    		number = 0;
-    	}
-    	$( "#chickenpicture" ).fadeOut('slow', function() {
-   			nextImage(results,number);
-   			$( "#chickenpicture" ).fadeIn('slow');
-   		});
-    }, 1500);
-  }
-}
 
-function OnLoad() {
-	var imageSearch = new google.search.ImageSearch();
-	imageSearch.setRestriction(google.search.ImageSearch.RESTRICT_IMAGESIZE,
-		google.search.ImageSearch.IMAGESIZE_EXTRA_LARGE);
-	imageSearch.setRestriction(google.search.ImageSearch.RESTRICT_IMAGETYPE,
-		google.search.ImageSearch.IMAGETYPE_PHOTO);
-	imageSearch.setRestriction(google.search.ImageSearch.RESTRICT_SAFESEARCH,
-		google.search.ImageSearch.SAFESEARCH_STRICT);
-	imageSearch.setSearchCompleteCallback(this, searchComplete, [imageSearch]);
 
-	imageSearch.execute("delicious BonChon");
-}
-google.setOnLoadCallback(OnLoad);
-
-function nextImage($results, $number) {
+function nextImage($imgurl) {
 	var contentDiv = document.getElementById('chickenpicture');
     
-	var result = $results[$number];
+	var result = $imgurl;
 	
 	var imgContainer = document.createElement('div');
 	var newImg = document.createElement('img');
+	
 	// There is also a result.url property which has the escaped version
-	newImg.src = result.tbUrl;
+	newImg.src = result;
 	newImg.setAttribute('width', '256px');
 	newImg.setAttribute('height', '200px');
 	

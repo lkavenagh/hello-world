@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	var location;
+	var city;
 	var state;
 	var country;
 	var requesturl;
