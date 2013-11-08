@@ -8,34 +8,36 @@
 			text-align:center;
 			margin-top:100px;
 			margin-bottom:0px;
-			background-color:green;
+			background-color:black;
 			}
 			body {
-			background-color:green;
+			background-color:black;
 			}
 		</style>
 		<title>
-			JUSTIN IS AWESOME!
+			GIANTS SUCK!
 		</title>
 
 	</head>
 	<body>
-		 <div id="flashingtext">JUSTIN IS AWESOME!</div>
-		 <img src="dancingbaby.gif">
+		 <div id="flashingtext">GIANTS SUCK!</div>
+		 <p align="center"><img src="dancingbaby.gif"></p>
 		 <script>
 			function flashtext() {
             var tmpColCheck = document.getElementById( "flashingtext" ).style.color;
 
-              if (tmpColCheck === 'silver') {
-                document.getElementById( "flashingtext" ).style.color = 'black';
+              if (tmpColCheck === 'green') {
+                document.getElementById( "flashingtext" ).style.color = 'red';
+              } else if (tmpColCheck === 'red') {
+                document.getElementById( "flashingtext" ).style.color = 'blue';
               } else {
-                document.getElementById( "flashingtext" ).style.color = 'silver';
+                document.getElementById( "flashingtext" ).style.color = 'green';
               }
             } 
             
             setInterval(function() {
                 flashtext();
-            }, 500 ); //set an interval timer up to repeat the function
+            }, 300 ); //set an interval timer up to repeat the function
 		</script>
 	</body>
 </html>
