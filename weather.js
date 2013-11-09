@@ -1,9 +1,8 @@
 jQuery(document).ready(function($) {
-	var city;
+	var location;
 	var state;
 	var country;
 	var requesturl;
-	var temp_f;
 	var apikey = "91f86ce5a898ddbc";
 	
 	$( "#weatherautotemp" ).click(function() {
@@ -24,7 +23,38 @@ jQuery(document).ready(function($) {
 		showTemp("http://api.wunderground.com/api/" + apikey + "/geolookup/q/" + inputSplit[1] + "/" + inputSplit[0] + ".json", this.attributes.item(0).nodeValue);
 	});
 	
+	$( "#weatherbktemp" ).click(function() {
+		$( this ).fadeTo('medium', 0.01);
+		$( "#weatherbkfc" ).fadeTo('medium', 0.01);
+		showTemp("http://api.wunderground.com/api/" + apikey + "/geolookup/q/11222.json", this.attributes.item(0).nodeValue);
+		showTemp("http://api.wunderground.com/api/" + apikey + "/geolookup/q/11222.json", 'weatherbkfc');
+	});
+	
 	function showTemp($thisurl, $thishandle) {
+		if ($thishandle == "weatherbkfc") {
+			$.ajax({
+				url : "http://api.wunderground.com/api/" + apikey + "/forecast10day/q/NY/Brooklyn.json",
+				dataType : "jsonp",
+				success : function(parsed_json) {
+					var tmp_str = "";
+					for (var i=0; i<parsed_json['forecast']['simpleforecast']['forecastday'].length; i++) {
+						month = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['monthname'];
+						day = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['day'];
+						weekday = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday'];
+						highC = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'];
+						highF = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit'];
+						tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + highF + "F / " + highC + "C";
+					}
+					document.getElementById($thishandle).innerHTML = "<p><b>Forecast</b>" + tmp_str + "</p>";
+					//$( "#" + $thishandle ).fadeTo('medium', 1);
+				},
+				error : function() {
+					document.getElementById($thishandle).innerHTML = "<p>Could not load weather! - click to refresh</p>";
+					$( "#" + $thishandle ).fadeTo('medium', 1);
+				}
+			});
+			return;
+		}
 		$.when(
 			$.ajax({
 				url : $thisurl,
@@ -53,15 +83,18 @@ jQuery(document).ready(function($) {
 				success : function(parsed_json) {
 					temp_f = parsed_json['current_observation']['temp_f'];
 					temp_c = parsed_json['current_observation']['temp_c'];
+					humidity = parsed_json['current_observation']['relative_humidity'];
+					weather = parsed_json['current_observation']['weather'];
 					if ($thishandle == "weathercitytemp") {
-						document.getElementById($thishandle).innerHTML = "<p>" + city + ", " + country + ": " + temp_f + "F / " + temp_c + "C</p>";
+						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + country + ": " + temp_f + "F / " + temp_c + "C<br>    Humidity: " + humidity + ", " + weather + "</p>";
 					} else {
-						document.getElementById($thishandle).innerHTML = "<p>" + city + ", " + state + " (" + country + "): " + temp_f + "F / " + temp_c + "C</p>";
+						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + state + " (" + country + "): " + temp_f + "F / " + temp_c + "C<br>    Humidity: " + humidity + ", " + weather + "</p>";
 					}
 					$( "#" + $thishandle ).fadeTo('medium', 1);
+					$( "#weatherbkfc" ).fadeTo('medium', 1);
 				},
 				error : function() {
-					document.getElementById($thishandle).innerHTML = "<p>Could not load weather!</p>";
+					document.getElementById($thishandle).innerHTML = "<p>Could not load weather! - click to refresh</p>";
 					$( "#" + $thishandle ).fadeTo('medium', 1);
 				}
 			});

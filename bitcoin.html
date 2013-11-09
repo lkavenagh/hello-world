@@ -5,6 +5,8 @@
 		<title>
 			Bitcoin
 		</title>
+		<script src="https://socketio.mtgox.com/socket.io/socket.io.js"></script>
+		<script src="./mtgox.js"></script>
 	</head>
 	<body>
 		<div class="header">
@@ -17,26 +19,28 @@
 		
 		<div class="section-break"> </div>
 		<div class="middle">
-		<div id="statuslabel"> <pred>Not connected</pred> </div>
-		<span id="tradepricelabel"> <p>Trade price will go here:</p> </span>
-		<span id="tradeprice"> <p>-99</p> </span> <br>
-		<span id="bidpricelabel"> <p>Bid price will go here:</p> </span>
-		<span id="bidprice"> <p>-99</p> </span> <br>
-		<span id="askpricelabel"> <p>Ask price will go here:</p> </span>
-		<span id="askprice"> <p>-99</p> </span> <br>
+		<div id="statuslabel"> <font color="red">Not connected</font> </div>
+		<div id="tradepricelabel"> Trade price will go here: </div>
+		<div id="tradeprice"> -99 </div><br>
+		<div id="bidpricelabel"> Bid price will go here: </div>
+		<div id="bidprice"> -99 </div><br>
+		<div id="askpricelabel"> Ask price will go here: </div>
+		<div id="askprice"> -99 </div>
+			<p>
+				Things I want to try out here:
+				<dl>
+				<dt>Website API</dt>
+				<dd> - RunKeeper</dd>
+				</dl>
+			</p>
 		</div>
 		</section>
-		<br>
-		<a href="./index.html"><p>Home</p></a>
 		<footer>
 			<hr>
 			<p>
-				Luke Kavenagh<br>
-				<p>twitter: <a href="http://www.twitter.com/lucaspewkas">@lucaspewkas</a></p>.
+				<a href="./index.html"><p>Home</p></a>
 			</p>
 			<hr>
 		</footer>
-		<script src="https://socketio.mtgox.com/socket.io/socket.io.js"></script>
-		<script src="./mtgox.js"></script>
 	</body>
 </html>

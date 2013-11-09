@@ -1,6 +1,6 @@
 var apikey = "AIzaSyA1w6xo6AiJQYhdnkg3UTWcXkoV5YhCXB0";
 var cx = "014292974721206889519:zjwkqhcfjuk";
-var searchterm = "bonchon";
+var searchterm = "cute kittens";
 var q = "https://www.googleapis.com/customsearch/v1?q=" + searchterm + "&searchType=image&cx=" + cx + "&key=" + apikey;
 
 var number;
@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
 			if (number>=count-1) {
 				number = 0;
 			};
-	    }, 2000);
+	    }, 3000);
     });
 });
 
