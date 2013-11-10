@@ -54,6 +54,12 @@ pc{
 a{
 	color:blue;
 	text-decoration: none;
+	vertical-align: middle;
+}
+
+img{
+	hspace:"1.5";
+	vspace:"2.5";
 }
 
 .poll {
@@ -118,16 +124,8 @@ dl{
 }
 
 .square{
-	height: 25px;
-	width: 50px;
-	background: silver;
-	margin-left:5%;
-	-webkit-transition:width 0.5s ease-in-out;
-}
-
-.bigsquare{
-	height: 100px;
-	width: 200px;
+	height: 45px;
+	width: 45px;
 	background: silver;
 	margin-left:5%;
 	-webkit-transition:width 0.5s ease-in-out;
@@ -136,7 +134,8 @@ dl{
 .fadeintext{
 	color: white;
 	opacity: 0;
-	margin-left:5%;
+	vertical-align: middle;
+	font-size: 30;
 }
 
 .fadeintextdelay{
@@ -149,40 +148,22 @@ dl{
 	color: white;
 	opacity: 1;
 	margin-left:5%;
+	vertical-align:middle;
 }
 
 .square:hover  > .fadeintext{
-	-webkit-animation:textappear 0.25s ease-in-out;
-	-webkit-animation-delay: 0.1s;
+	-webkit-animation:textappear 0.1s ease-in-out;
+	-webkit-animation-delay: 0.25s;
 	-webkit-animation-fill-mode:forwards;
 }
 
 .square:hover  > .disappearText{
-	-webkit-animation:textdisappear 0.1s ease-in-out;
+	-webkit-animation:textdisappear 0.1s;
 	-webkit-animation-fill-mode:forwards;
 }
 
 .square:hover {
-	width:200px;
-	-webkit-animation:colorchange 1s;
-}
-
-.bigsquare:hover  > .fadeintext{
-	-webkit-animation:textappear 2s ease-in-out;
-	-webkit-animation-fill-mode:forwards;
-}
-
-.bigsquare:hover  > .fadeintextdelay{
-	-webkit-animation:textappear 2s ease-in-out;
-	-webkit-animation-delay: 2s;
-	-webkit-animation-fill-mode:forwards;
-}
-.bigsquare:hover  > .disappearText{
-	-webkit-animation:textdisappear 0.1s ease-in-out;
-	-webkit-animation-fill-mode:forwards;
-}
-
-.bigsquare:hover {
-	width:400px;
-	-webkit-animation:colorchange 2s ease-in-out;
+	width:300;
+	-webkit-animation:colorchange 0.5s;
+	-webkit-animation-fill-mode:backwards;
 }
