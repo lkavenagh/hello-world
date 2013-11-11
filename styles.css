@@ -38,6 +38,21 @@ p{
 	margin-left:5%;
 }
 
+pdis{
+	color:black;
+	font-size:130%;
+	margin-left:1px;
+}
+
+papp{
+	color:black;
+	font-size:130%;
+	opacity:0;
+	display:inline-block;
+	margin-top: 7.5px;
+	margin-left: 50px;
+}
+
 pf{
 	color:black;
 	font-size:50%;
@@ -86,7 +101,7 @@ img{
 	background-color:black;
 }
 .little-break{
-	margin-top:1px;
+	margin-top:5px;
 	background-color:white;
 }
 
@@ -109,61 +124,10 @@ dl{
 	font-weight:bold
 }
 
-@-webkit-keyframes colorchange {
-	0% {background: silver}
-	100% {background: silver}
-}
-
-@-webkit-keyframes textappear {
-	from {opacity: 0}
-	to {opacity: 1}
-}
-@-webkit-keyframes textdisappear {
-	from {opacity: 1}
-	to {opacity: 0}
-}
-
 .square{
 	height: 45px;
 	width: 45px;
 	background: silver;
 	margin-left:5%;
-	-webkit-transition:width 0.5s ease-in-out;
-}
-
-.fadeintext{
-	color: white;
-	opacity: 0;
-	vertical-align: middle;
-	font-size: 30;
-}
-
-.fadeintextdelay{
-	color: white;
-	opacity: 0;
-	margin-left:5%;
-}
-
-.disappearText{
-	color: white;
-	opacity: 1;
-	margin-left:5%;
-	vertical-align:middle;
-}
-
-.square:hover  > .fadeintext{
-	-webkit-animation:textappear 0.1s ease-in-out;
-	-webkit-animation-delay: 0.25s;
-	-webkit-animation-fill-mode:forwards;
-}
-
-.square:hover  > .disappearText{
-	-webkit-animation:textdisappear 0.1s;
-	-webkit-animation-fill-mode:forwards;
-}
-
-.square:hover {
-	width:300;
-	-webkit-animation:colorchange 0.5s;
-	-webkit-animation-fill-mode:backwards;
+	cursor: pointer;
 }

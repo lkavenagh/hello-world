@@ -46,7 +46,6 @@ jQuery(document).ready(function($) {
 						tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + highF + "F / " + highC + "C";
 					}
 					document.getElementById($thishandle).innerHTML = "<p><b>Forecast</b>" + tmp_str + "</p>";
-					//$( "#" + $thishandle ).fadeTo('medium', 1);
 				},
 				error : function() {
 					document.getElementById($thishandle).innerHTML = "<p>Could not load weather! - click to refresh</p>";
@@ -86,9 +85,9 @@ jQuery(document).ready(function($) {
 					humidity = parsed_json['current_observation']['relative_humidity'];
 					weather = parsed_json['current_observation']['weather'];
 					if ($thishandle == "weathercitytemp") {
-						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + country + ": " + temp_f + "F / " + temp_c + "C<br>    Humidity: " + humidity + ", " + weather + "</p>";
+						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + country + ": " + temp_f + "F / " + temp_c + "C<br>Humidity: " + humidity + ", " + weather + "</p>";
 					} else {
-						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + state + " (" + country + "): " + temp_f + "F / " + temp_c + "C<br>    Humidity: " + humidity + ", " + weather + "</p>";
+						document.getElementById($thishandle).innerHTML = "<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + state + " (" + country + "): " + temp_f + "F / " + temp_c + "C<br>Humidity: " + humidity + ", " + weather + "</p>";
 					}
 					$( "#" + $thishandle ).fadeTo('medium', 1);
 					$( "#weatherbkfc" ).fadeTo('medium', 1);
