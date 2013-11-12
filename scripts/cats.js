@@ -6,6 +6,8 @@ var q = "https://www.googleapis.com/customsearch/v1?q=" + searchterm + "&searchT
 var number;
 var results;
 var count;
+var loaded = false;
+var newImg = document.createElement('img');
 
 jQuery(document).ready(function($) {
 	nextImage("http://www.keter.com/files/images/global/themes/7ECC14/product__showcase__loading_animation.gif");
@@ -24,17 +26,14 @@ jQuery(document).ready(function($) {
 	).then( function() {
 		number = 0;
 		setInterval( function() {
-	    	$( "#chickenpicture" ).fadeTo('medium', 0, function() {
+	    	$( "#picture" ).fadeTo('medium', 0, function() {
 	   			nextImage(results[number]['link']);
-	   			$( "#chickenpicture" ).fadeTo('medium',1);
 	   		});
-	   		number++;
-	   		while (results[number]['link'].search(/\(/) > -1) {
-				number++;
-				if (number>=count-1) {
-					number = 0;
-				};
-			}
+	   		if (loaded) {
+	   			number++;
+	   			loaded = false;
+	   		}
+
 			if (number>=count-1) {
 				number = 0;
 			};
@@ -45,15 +44,23 @@ jQuery(document).ready(function($) {
 
 
 function nextImage($imgurl) {
-	var contentDiv = document.getElementById('chickenpicture');
+	var contentDiv = document.getElementById('picture');
     
 	var result = $imgurl;
 	
 	var imgContainer = document.createElement('div');
-	var newImg = document.createElement('img');
 	
-	// There is also a result.url property which has the escaped version
+	if (loaded) {
+		newImg = document.createElement('img');
+		
+	}
 	newImg.src = result;
+	// There is also a result.url property which has the escaped version
+	if (newImg.width == 0) {
+		loaded = false;
+		return;
+	}
+	loaded = true;
 	newImg.setAttribute('width', '325');
 	newImg.setAttribute('height', '200px');
 	
@@ -63,4 +70,5 @@ function nextImage($imgurl) {
     contentDiv.innerHTML = '';
     contentDiv.setAttribute
 	contentDiv.appendChild(imgContainer);
+	$( "#picture" ).fadeTo('medium',1);
 };
