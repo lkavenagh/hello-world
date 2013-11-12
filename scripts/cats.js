@@ -6,11 +6,10 @@ var q = "https://www.googleapis.com/customsearch/v1?q=" + searchterm + "&searchT
 var number;
 var results;
 var count;
-var loaded = false;
+var loaded = true;
 var newImg = document.createElement('img');
 
 jQuery(document).ready(function($) {
-	nextImage("http://www.keter.com/files/images/global/themes/7ECC14/product__showcase__loading_animation.gif");
 	$.when(
 		$.ajax({
 			url : q,
@@ -31,7 +30,6 @@ jQuery(document).ready(function($) {
 	   		});
 	   		if (loaded) {
 	   			number++;
-	   			loaded = false;
 	   		}
 
 			if (number>=count-1) {
@@ -52,12 +50,11 @@ function nextImage($imgurl) {
 	
 	if (loaded) {
 		newImg = document.createElement('img');
-		
+		newImg.src = result;
+		loaded = false;
 	}
-	newImg.src = result;
 	// There is also a result.url property which has the escaped version
 	if (newImg.width == 0) {
-		loaded = false;
 		return;
 	}
 	loaded = true;
