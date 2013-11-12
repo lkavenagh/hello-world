@@ -3,35 +3,18 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<title>
-			Weather
+			Basketball
 		</title>
 	</head>
 	<body>
 		<div class="header">
-			<h1>Weather</h1>
+			<h1>Basketball</h1>
 		</div>
 		<div class="section-break"> <br> </div>
-		<br>
-		<p><table border="0" cellpadding="10">
-		<tr>
-		<td width="30%" align=center>
-		<div id="weatherautotemp" style="cursor: pointer"> <phover>Click for auto locate weather</phover></div>
-		<div class="forecastdiv"> </div>
-		</td>
-		<td width="30%" align=center>
-		<div id="weatherziptemp" style="cursor: pointer"> <phover>Click to input zip code</phover> </div>
-		<div class="forecastdiv"> </div>
-		</td>
-		<td width="30%" align=center>
-		<div id="weathercitytemp" style="cursor: pointer"> <phover>Click to input city name</phover> </div>
-		<div class="forecastdiv"> </div>
-		</td>
-		</tr>
-		</table></p>
-		<br>
-		<pf>Data from: <a href="http://www.wunderground.com/?apiref=a951aa72425a2d26"><img src="wundergroundLogo_black_horz.png" height="20" width="125"></a></pf>
-		<div class="section-break"> <br> </div>
-		<br>
+		
+		<p>So far the most useful things the NBA or ESPN APIs offer is a list of NBA teams, some seemingly random team colors and a link to the team website. Useless, but good practice I suppose:</p>
+		<div id="teams"> </div>
+		
 		<footer>
 			<hr>
 			<p>
@@ -41,7 +24,8 @@
 		</footer>
 		<script src="./jquery-1.10.2.min.js"></script>
 		<script src="./jquery.color.plus-names-2.1.2.min.js"></script>
-		<script src="./weather.js"></script>
+		<script src="./basketball.js"></script>
+		
 		<pf>Visitors: <a href="http://www.hitwebcounter.com" target="_blank">
 		<img src="http://hitwebcounter.com/counter/counter.php?page=5129050&style=0007&nbdigits=1&type=ip&initCount=0" title="Unique visitors" Alt="completely free"   border="0" >
 		</a><br/>
@@ -49,5 +33,6 @@
 		target="_blank" style="font-family: Geneva, Arial, Helvetica, sans-serif; 
 		color: #686A6F; text-decoration: none ;"><strong> </strong>
 		</a>  </pf> 
+		
 	</body>
 </html>

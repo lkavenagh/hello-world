@@ -6,6 +6,12 @@ jQuery(document).ready(function($) {
 	var conditionsurl = 'NA';
 	var apikey = "91f86ce5a898ddbc";
 	
+	$("phover").hover(function(){
+		$( this ).stop().animate({color:"red"},0);
+	}, function() {
+		$( this ).stop().animate({color:"black"},0);
+	});
+	
 	$( "#weatherautotemp" ).click(function() {
 		$( this ).fadeTo('medium', 0);
 		$( this ).next(".forecastdiv").fadeTo('medium', 0);
