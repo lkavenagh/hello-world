@@ -13,6 +13,7 @@ jQuery(document).ready(function($) {
     		$('#numbers').append('<div>'+i+'</div>');
 		}
 		$("#clicks").html('Click to change multiples of 3');
+		$('#clicks').unbind('click');
 		$('#clicks').bind('click',function(){
 			//change multiples of 3 to fizz
 			var c = $('#numbers').children();
