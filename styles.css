@@ -60,10 +60,11 @@ papp{
 	margin-left: 50px;
 }
 
-pf{
+p.footer{
 	color:black;
 	font-size:50%;
 	margin-left:5%;
+	vertical-align: middle;
 }
 
 pc{
