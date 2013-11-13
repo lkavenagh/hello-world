@@ -7,6 +7,19 @@ jQuery(document).ready(function($) {
 	var apikey = "818a91d82fc2c53d";
 	var tempform = "C";
 	
+	jQuery('body').ajaxStart(function(){
+	    alert( "ajaxStart" );
+	  }).ajaxStop(function(){
+	    alert( "ajaxStop" );
+	  }).ajaxSend(function(){
+	    alert( "ajaxSend" );
+	  }).ajaxComplete(function(){
+	    alert( "ajaxComplete" );
+	  }).ajaxError(function(){
+	    alert( "ajaxError" );
+	  }).ajaxSuccess(function(){
+	    alert( "ajaxSuccess" );
+	  });
 	
 	$("#tempformF").hide(0, function(){});
 	
@@ -24,7 +37,7 @@ jQuery(document).ready(function($) {
 		tempform = "C";
 	});
 	
-	$("phover").hover(function(){
+	$("p.hover").hover(function(){
 		$( this ).stop().animate({color:"red"},0);
 	}, function() {
 		$( this ).stop().animate({color:"black"},0);
@@ -59,9 +72,10 @@ jQuery(document).ready(function($) {
 	
 	function showWeatherReport($thisurl, $thishandle, specdate) {
 		var promise = getUrlForLocation($thisurl);
-		
-		if ($thishandle="weatherbktemp") {
+
+		if ($thishandle=="weatherbktemp") {
 			promise.done(function() {
+				showConditions($thishandle);
 				showConditionsDate($thishandle, "2013-11-28");
 			});
 		} else {
@@ -74,10 +88,10 @@ jQuery(document).ready(function($) {
 	
 	function getUrlForLocation($thisurl) {
 		var dfd = new $.Deferred();
-		console.log($thisurl);
 		$.ajax({
 			url : $thisurl,
 			dataType : "jsonp",
+			beforeSend : function() { alert("getUrlForLocation.beforeSend"); },
 			success : function(parsed_json) {
 				city = parsed_json['location']['city'];
 				state = parsed_json['location']['state'];
@@ -101,6 +115,7 @@ jQuery(document).ready(function($) {
 		$.ajax({
 			url : conditionsurl,
 			dataType : "jsonp",
+			beforeSend : function() { alert("showConditions.beforeSend"); },
 			success : function(parsed_json) {
 				if (tempform=="C") {
 					temp = parsed_json['current_observation']['temp_c'];
@@ -124,10 +139,12 @@ jQuery(document).ready(function($) {
 	};
 	
 	function showForecast($thishandle) {
+		document.getElementById($thishandle).innerHTML = "<p>Loading forecast...</p>";
 		$.when(
 			$.ajax({
 				url : "http://api.wunderground.com/api/" + apikey + "/forecast10day/q/" + state + "/" + city + ".json",
 				dataType : "jsonp",
+				beforeSend : function() { alert("showForecast1.beforeSend"); },
 				success : function(parsed_json) {
 					if(parsed_json["forecast"]==undefined) {
 						requesturl = "http://api.wunderground.com/api/" + apikey + "/forecast10day/q/" + country + "/" + city + ".json";
@@ -140,21 +157,23 @@ jQuery(document).ready(function($) {
 			$.ajax({
 				url : requesturl,
 				dataType : "jsonp",
+				beforeSend : function() { alert("showForecast2.beforeSend"); },
 				success : function(parsed_json) {
 					var tmp_str = "";
-					for (var i=0; i<parsed_json['forecast']['simpleforecast']['forecastday'].length; i++) {
-						month = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['monthname'];
-						day = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['day'];
-						weekday = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday'];
+					data = parsed_json['forecast']['simpleforecast']['forecastday'];
+					$.each(data, function(k,v) {
+						month = v['date']['monthname'];
+						day = v['date']['day'];
+						weekday = v['date']['weekday'];
 						if (tempform=="C") {
-							high = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'];
-							low = parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'];
+							high = v['high']['celsius'];
+							low = v['low']['celsius'];
 						} else {
-							high = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit'];
-							low = parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit'];
+							high = v['high']['fahrenheit'];
+							low = v['low']['fahrenheit'];
 						}
 						tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + low + " - " + high + tempform;
-					}
+					});
 					$("#" + $thishandle).next(".forecastdiv").html("<p><b>Forecast for " + city + "</b>" + tmp_str + "</p>");
 					$( "#" + $thishandle ).next(".forecastdiv").fadeTo('medium', 1);
 				},
@@ -175,6 +194,7 @@ jQuery(document).ready(function($) {
 			$.ajax({
 				url : "http://api.wunderground.com/api/" + apikey + "/forecast10day/q/" + state + "/" + city + ".json",
 				dataType : "jsonp",
+				beforeSend : function() { alert("showConditionsDate1.beforeSend"); },
 				success : function(parsed_json) {
 					if(parsed_json["forecast"]==undefined) {
 						requesturl = "http://api.wunderground.com/api/" + apikey + "/forecast10day/q/" + country + "/" + city + ".json";
@@ -187,24 +207,26 @@ jQuery(document).ready(function($) {
 			$.ajax({
 				url : requesturl,
 				dataType : "jsonp",
+				beforeSend : function() { alert("showConditionsDate2.beforeSend"); },
 				success : function(parsed_json) {
 					var tmp_str = "";
-					for (var i=0; i<parsed_json['forecast']['simpleforecast']['forecastday'].length; i++) {
-						year = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['year'];
-						month = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['month'];
-						day = parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['day'];
+					data = parsed_json['forecast']['simpleforecast']['forecastday'];
+					$.each(data, function(k,v) {
+						year = v['date']['year'];
+						month = v['date']['month'];
+						day = v['date']['day'];
 						if (year==specyear && month==specmonth && day==specday) {
 							found = true;
 							if (tempform=="C") {
-								high = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'];
-								low = parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'];
+								high = v['high']['celsius'];
+								low = v['low']['celsius'];
 							} else {
-								high = parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit'];
-								low = parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit'];
+								high = v['high']['fahrenheit'];
+								low = v['low']['fahrenheit'];
 							}
 							tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + low + " - " + high + tempform;
 						}
-					}
+					});
 					if (found) {
 						$("#" + $thishandle).next(".forecastdiv").html("<p><b>Forecast for " + city + "</b>" + tmp_str + "</p>");
 						$( "#" + $thishandle ).next(".forecastdiv").fadeTo('medium', 1);

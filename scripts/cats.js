@@ -6,7 +6,6 @@ var q = "https://www.googleapis.com/customsearch/v1?q=" + searchterm + "&searchT
 var number;
 var results;
 var count;
-var loaded = true;
 var newImg = document.createElement('img');
 
 jQuery(document).ready(function($) {
@@ -28,9 +27,7 @@ jQuery(document).ready(function($) {
 	    	$( "#picture" ).fadeTo('medium', 0, function() {
 	   			nextImage(results[number]['link']);
 	   		});
-	   		if (loaded) {
-	   			number++;
-	   		}
+   			number++;
 
 			if (number>=count-1) {
 				number = 0;
@@ -48,16 +45,10 @@ function nextImage($imgurl) {
 	
 	var imgContainer = document.createElement('div');
 	
-	if (loaded) {
-		newImg = document.createElement('img');
-		newImg.src = result;
-		loaded = false;
-	}
+	newImg = document.createElement('img');
+	newImg.src = result;
+
 	// There is also a result.url property which has the escaped version
-	if (newImg.width == 0) {
-		return;
-	}
-	loaded = true;
 	newImg.setAttribute('width', '325');
 	newImg.setAttribute('height', '200px');
 	
@@ -65,7 +56,7 @@ function nextImage($imgurl) {
 
       // Put our title + image in the content
     contentDiv.innerHTML = '';
-    contentDiv.setAttribute
+    contentDiv.setAttribute;
 	contentDiv.appendChild(imgContainer);
 	$( "#picture" ).fadeTo('medium',1);
 };
