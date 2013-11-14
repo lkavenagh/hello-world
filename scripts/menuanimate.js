@@ -1,22 +1,23 @@
 $(document).ready(function(){
+	
 	$(".square").mouseenter(function(){
-		$( this ).stop().animate({width:'300px'},300, function() {
-			$( this ).find("pdis").stop().animate({opacity:'0'},0);
-		});
-		$( this ).find("papp").stop().animate({opacity:'1'},0);
+		$( this ).stop().animate({width:'300px'},400);
+		$( this ).find("img.menuicon").hide();
+		$( this ).find("p.app").css('display', 'inline');
 	});
-	$("pdis").mouseenter(function(){
-		$( this ).stop().animate({opacity:'0'},0);
+	
+	$("img.menuicon").mouseenter(function(){
+		$( this ).stop().hide();
 	});
 	
 	$(".square").mouseleave(function(){
-		$( this ).stop().animate({width:'45px'}, 300, function() {
-			$( this ).find("pdis").stop().animate({opacity:'1'},0);
-		});
-		$( this ).find("papp").stop().animate({opacity:'0'},300);
+		$( this ).stop().animate({width:'45px'}, 400);
+		$( this ).find("img.menuicon").show();
+		$( this ).find("p.app").hide();
 	});
 	
 	$(".square").click(function(){
 		window.location = $(this).find('a').attr('href');
 	});
+	
 });

@@ -39,50 +39,30 @@ p{
 }
 
 p.hover{
-	color:black;
-	font-size:130%;
 	margin-left:5%;
 	cursor:pointer;
 }
 
-pdis{
-	color:black;
-	font-size:130%;
-	margin-left:1px;
-}
-
-papp{
-	color:black;
-	font-size:130%;
-	opacity:0;
-	display:inline-block;
-	margin-top: 7.5px;
-	margin-left: 50px;
+p.app{
+	opacity:1;
+	display:none;
 }
 
 p.footer{
-	color:black;
 	font-size:50%;
-	margin-left:5%;
-	vertical-align: middle;
-}
-
-pc{
-	color:black;
-	font-size:130%;
-	margin-left:5%;
-	font-family:"Courier New";
 }
 
 a{
 	color:blue;
 	text-decoration: none;
-	vertical-align: middle;
 }
 
-img{
-	hspace:"1.5";
-	vspace:"2.5";
+img.menuicon{
+	margin-top:2.5px;
+	height:40px;
+	width:40px;
+	display:inline-block;
+	vertical-align:middle;
 }
 
 .poll {
@@ -143,4 +123,11 @@ dl{
 	background: silver;
 	margin-left:5%;
 	cursor: pointer;
+	text-align: center;
+	line-height: 45px;
+}
+
+table.btcprices{
+	font-size:130%;
+	border-spacing:50 0;
 }
