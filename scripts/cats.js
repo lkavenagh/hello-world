@@ -24,17 +24,12 @@ jQuery(document).ready(function($) {
 	).then( function() {
 		number = 0;
 		var imgURLs = [];
-		console.log(count);
 		for (i=0; i<count; i++){
-			console.log(results[i]['link']);
 			imgURLs.push(results[i]['link']);
-			console.log(imgURLs[i]);
 		}
 		preloadImages(imgURLs);
 		setInterval( function() {
-	    	$( "#picture" ).fadeTo('medium', 0, function() {
-	   			nextImage(results[number]['link']);
-	   		});
+   			nextImage(number);
    			number++;
 
 			if (number>=count-1) {
@@ -45,37 +40,44 @@ jQuery(document).ready(function($) {
 });
 
 function preloadImages(array) {
+	
     if (!preloadImages.list) {
         preloadImages.list = [];
     }
     for (var i = 0; i < array.length; i++) {
         var img = new Image();
-        img.src = array[i];
+        if (i==3) {
+        	img.src = array[i].substring(1,array[i].length);
+        } else {
+        	img.src = array[i];
+        }
+        
         preloadImages.list.push(img);
     }
     
 };
 
-function nextImage($imgurl) {
-	var contentDiv = document.getElementById('picture');
+function nextImage(number) {
     
-	var result = $imgurl;
+	var imgContainer = document.getElementById('picture');
 	
-	var imgContainer = document.createElement('div');
+	$( "#picture" ).fadeTo('medium', 0, function() {
+		imgContainer.src = preloadImages.list[number].src;
+	});
 	
-	newImg = document.createElement('img');
-	newImg.src = result;
+	$( "#picture" ).load(function() {
+		$( "#picturelabel").html(preloadImages.list[number].src);
+	}).error(function() {
+		$( "#picturelabel").html("NO IMAGE");
+	});
+	
+	imgContainer.setAttribute('width', '325px');
+	imgContainer.setAttribute('height', '200px');
 
-	// There is also a result.url property which has the escaped version
-	newImg.setAttribute('width', '325');
-	newImg.setAttribute('height', '200px');
+	if ($( "#picturelabel" ).html() != "NO IMAGE") {
+		$( "#picture" ).fadeTo('medium',1);
+	}
 	
-	imgContainer.appendChild(newImg);
 
-      // Put our title + image in the content
-    contentDiv.innerHTML = '';
-    contentDiv.setAttribute;
-	contentDiv.appendChild(imgContainer);
-	$( "#picturelabel").html(newImg.src);
-	$( "#picture" ).fadeTo('medium',1);
+
 };
