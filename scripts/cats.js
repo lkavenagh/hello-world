@@ -23,6 +23,14 @@ jQuery(document).ready(function($) {
 		})
 	).then( function() {
 		number = 0;
+		var imgURLs = [];
+		console.log(count);
+		for (i=0; i<count; i++){
+			console.log(results[i]['link']);
+			imgURLs.push(results[i]['link']);
+			console.log(imgURLs[i]);
+		}
+		preloadImages(imgURLs);
 		setInterval( function() {
 	    	$( "#picture" ).fadeTo('medium', 0, function() {
 	   			nextImage(results[number]['link']);
@@ -32,11 +40,21 @@ jQuery(document).ready(function($) {
 			if (number>=count-1) {
 				number = 0;
 			};
-	    }, 3000);
+	    }, 1000);
     });
 });
 
-
+function preloadImages(array) {
+    if (!preloadImages.list) {
+        preloadImages.list = [];
+    }
+    for (var i = 0; i < array.length; i++) {
+        var img = new Image();
+        img.src = array[i];
+        preloadImages.list.push(img);
+    }
+    
+};
 
 function nextImage($imgurl) {
 	var contentDiv = document.getElementById('picture');
@@ -58,5 +76,6 @@ function nextImage($imgurl) {
     contentDiv.innerHTML = '';
     contentDiv.setAttribute;
 	contentDiv.appendChild(imgContainer);
+	$( "#picturelabel").html(newImg.src);
 	$( "#picture" ).fadeTo('medium',1);
 };
