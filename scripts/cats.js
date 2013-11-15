@@ -74,4 +74,6 @@ function nextImage(number) {
 	imgContainer.setAttribute('width', '325px');
 	imgContainer.setAttribute('height', '200px');
 
+	$( "#picture" ).fadeTo('medium',1);
+
 };
