@@ -65,6 +65,11 @@ img.menuicon{
 	vertical-align:middle;
 }
 
+img.slideshow{
+	height:200;
+	width:325;
+}
+
 .poll {
 	color:white;
 	background-color:black;
@@ -130,4 +135,10 @@ dl{
 table.btcprices{
 	font-size:130%;
 	border-spacing:50 0;
+}
+
+#map-canvas {
+	height: 50%;
+	width: 75%;
+	margin:0 auto;
 }

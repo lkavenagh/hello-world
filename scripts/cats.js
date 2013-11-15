@@ -7,6 +7,7 @@ var number;
 var results;
 var count;
 var newImg = document.createElement('img');
+var timer;
 
 jQuery(document).ready(function($) {
 	$.when(
@@ -15,6 +16,7 @@ jQuery(document).ready(function($) {
 			dataType : "jsonp",
 			success : function(parsed_json) {
 				results = parsed_json['items'];
+				console.log(q);
 				count = parseInt(parsed_json['queries']['request'][0]['count']);
 			},
 			error : function() {
@@ -29,13 +31,13 @@ jQuery(document).ready(function($) {
 		}
 		preloadImages(imgURLs);
 		setInterval( function() {
-   			nextImage(number);
-   			number++;
-
+			nextImage(number);
+			number++;
+		
 			if (number>=count-1) {
 				number = 0;
 			};
-	    }, 1000);
+		}, 1000);
     });
 });
 
@@ -60,20 +62,15 @@ function preloadImages(array) {
 function nextImage(number) {
     
 	var imgContainer = document.getElementById('picture');
+	var imgContainerNew = document.getElementById('standbypicture');
 	
-	$( "#picture" ).fadeTo('medium', 0, function() {
-		imgContainer.src = preloadImages.list[number].src;
-	});
+	imgContainerNew.src = preloadImages.list[number].src;
 	
-	$( "#picture" ).load(function() {
-		$( "#picturelabel").html(preloadImages.list[number].src);
-	}).error(function() {
-		$( "#picturelabel").html("NO IMAGE");
-	});
-	
-	imgContainer.setAttribute('width', '325px');
-	imgContainer.setAttribute('height', '200px');
-
-	$( "#picture" ).fadeTo('medium',1);
+	if (imgContainerNew.complete) {
+		$( "#picture" ).fadeTo('medium', 0, function() {
+			imgContainer.src = imgContainerNew.src;
+			$( "#picture" ).fadeTo('medium',1);
+		});
+	}
 
 };
