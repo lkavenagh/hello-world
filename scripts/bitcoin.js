@@ -5,79 +5,26 @@ jQuery(document).ready(function($) {
 	var oldprices = [0, 0, 0, 0, 0];
 	var newprices = [0, 0, 0, 0, 0];
 	var timestamp = ['',''];
-	var hist_averages_24 = [];
-	var hist_averages_AT = [];
 	var hist_24_file;
 	var hist_AT_file;
+	var hist = [];
 	var colors = ['red', 'green', 'black'];
+	var offset = new Date().getTimezoneOffset()/60;
 	
 	$.when(getCurrentPrices()).done(function() {
 		displayPrices(oldprices, newprices);
 	});
 	
 	$.when(getHistoricalPrices()).done(function() {
-		$.ajax({
-			url : hist_24_file,
-			dataType : 'text',
-			success : function(data){
-				data = data.replace(/\r/g, "");
-				results = $.parse(data, {
-					delimiter: ",",
-					header: true,
-					dynamicTyping: true
-				});
-				$(results['results']['rows']).each(function(k,v) {
-					hist_averages_24[k] = [];
-					hist_averages_24[k][0] = new Date(v['datetime'] + ' GMT+0500');
-					hist_averages_24[k][1] = v['average'];
-				});
-				$.plot($('#placeholder24'), [hist_averages_24], {
-					xaxis : {
-						mode:'time',
-						timeformat: '%d, %H:%M',
-						min: hist_averages_24[0][0],
-						max: hist_averages_24[hist_averages_24.length-1][0]
-					}
-				});
-			},
-			error : function(message, a, b) {
-				console.log(b);
-			}
-		});
-		
-		$.ajax({
-			url : hist_AT_file,
-			dataType : 'text',
-			success : function(data){
-				data = data.replace(/\r/g, "");
-				results = $.parse(data, {
-					delimiter: ",",
-					header: true,
-					dynamicTyping: true
-				});
-				$(results['results']['rows']).each(function(k,v) {
-					hist_averages_AT[k] = [];
-					hist_averages_AT[k][0] = new Date(v['datetime'] + ' GMT+0500');
-					hist_averages_AT[k][1] = v['average'];
-				});
-				$.plot($('#placeholderAT'), [hist_averages_AT], {
-					xaxis : {
-						mode:'time',
-						timeformat: '%b, \'%y',
-						min: hist_averages_AT[0][0],
-						max: hist_averages_AT[hist_averages_AT.length-1][0]
-					}
-				});
-			},
-			error : function(message, a, b) {
-				console.log(b);
-			}
-		});
+		displayHistPlot(hist_24_file, 'placeholder24');
+		displayHistPlot(hist_AT_file, 'placeholderAT');
+		displayHourlyPlot(1, 'placeholderHourly');
 	});
 	
 	setInterval( function() {
 		$.when(getCurrentPrices()).done(function() {
 			displayPrices(oldprices, newprices);
+			displayHourlyPlot(1, 'placeholderHourly');
 		});
 	}, 10000);
 	
@@ -133,4 +80,89 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	
+	function displayHistPlot(thisurl, thishandle) {
+		hist = [];
+		offsetstr = ('GMT' + sign(offset) + ('0' + offset).slice(-2) + '00');
+		$.ajax({
+			url : thisurl,
+			dataType : 'text',
+			success : function(data){
+				data = data.replace(/\r/g, "");
+				results = $.parse(data, {
+					delimiter: ",",
+					header: true,
+					dynamicTyping: true
+				});
+				$(results['results']['rows']).each(function(k,v) {
+					hist[k] = [];
+					hist[k][0] = new Date(v['datetime'] + ' ' + offsetstr);
+					hist[k][1] = v['average'];
+				});
+				if (thishandle=='placeholder24') {
+					tf = '%H:%M';
+				} else {
+					tf = '%b \'%y';
+				}
+				$.plot($('#' + thishandle), [hist], {
+					xaxis : {
+						mode:'time',
+						timeformat: tf,
+						min: hist[0][0],
+						max: hist[hist.length-1][0]
+					}
+				});
+			},
+			error : function(message, a, b) {
+				console.log(b);
+			}
+		});
+	};
+	
+	function displayHourlyPlot(len, thishandle) {
+		compTime = new Date().setHours(new Date().getHours() - len - offset);
+		thisHist = [];
+		$.ajax({
+			url : hist_24_file,
+			dataType : 'text',
+			success : function(data){
+				data = data.replace(/\r/g, "");
+				results = $.parse(data, {
+					delimiter: ",",
+					header: true,
+					dynamicTyping: true
+				});
+				
+				$(results['results']['rows']).each(function(k,v) {
+					hist[k] = [];
+					hist[k][0] = new Date(v['datetime'] + ' ' + offsetstr);
+					hist[k][1] = v['average'];
+				});
+				
+				k = 0;
+				for (i=0; i<hist.length-1; i++) {
+					if (hist[i][0].getTime() > compTime) {
+						thisHist[k] = [];
+						thisHist[k][0] = hist[i][0];
+						thisHist[k][1] = hist[i][1];
+						k++;
+					}
+				};
+				
+				$.plot($('#' + thishandle), [thisHist], {
+					xaxis : {
+						mode:'time',
+						timeformat: '%H:%M',
+						min: thisHist[0][0],
+						max: thisHist[thisHist.length-1][0]
+					}
+				});
+			},
+			error : function(message, a, b) {
+				alert(c);
+			}
+		});
+	};
+	
+	function sign(x) { return x > 0 ? '+' : x < 0 ? '-' : '+'; }
 });
