@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 			displayPrices(oldprices, newprices);
 			displayHourlyPlot(curLen, 'placeholderHourly');
 		});
-	}, 10000);
+	}, 30000);
 	
 	function displayPrices(prices, newprices) {
 		k = (newprices[0] > oldprices[0]) ? 1 : (newprices[0] == oldprices[0] ? 2 : 0);
