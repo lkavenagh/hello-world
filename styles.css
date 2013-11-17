@@ -43,6 +43,12 @@ p.hover{
 	cursor:pointer;
 }
 
+p.button{
+	display:inline;
+	border-style:outset;
+	border-width:5px
+}
+
 p.app{
 	opacity:1;
 	display:none;
@@ -80,13 +86,6 @@ img.slideshow{
 .header{
 	background-color:white;
 	color:black;
-}
-
-.middle{
-	background-color:white;
-	color:black;
-	border:1;
-	margin-left:5%;
 }
 
 .section-break{

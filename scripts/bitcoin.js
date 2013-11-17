@@ -12,6 +12,8 @@ jQuery(document).ready(function($) {
 	var offset = new Date().getTimezoneOffset()/60;
 	var curLen = 1;
 	
+	$('#1').css('border-style', 'inset');
+	
 	$("p.hover").hover(function(){
 		$( this ).stop().animate({color:"red"},0);
 	}, function() {
@@ -22,6 +24,7 @@ jQuery(document).ready(function($) {
 		$(this).siblings('.hover').css('border-style', 'outset');
 		$(this).css('border-style', 'inset');
 		curLen = this.attributes['id'].nodeValue;
+		$('#labelHourly').html(curLen + '-hour price');
 		$.when($('#placeholderHourly').fadeTo('medium', 0.01))
 		.then(function() {
 			displayHourlyPlot(curLen, 'placeholderHourly');
@@ -58,9 +61,9 @@ jQuery(document).ready(function($) {
 		$('#askprice').html('<td>Ask price:  </td><td><font color=' + colors[k] + '>$' + newprices[2] + '</font></td>');
 
 		k = newprices[3] > oldprices[3] ? 1 : (newprices[3] == oldprices[3] ? 2 : 0);
-		$('#dailyvol').html('24 hour total volume: ' + newprices[3] + ' BTC');
+		$('#dailyvol').html('<p>24 hour total volume: ' + newprices[3] + ' BTC</p>');
 
-		$('#timestamp').html('Last data received: ' + timestamp[0]);
+		$('#timestamp').html('<p>Last data received: ' + timestamp[0] + '</p>');
 
 		oldprices = newprices.slice(0);
 	}
