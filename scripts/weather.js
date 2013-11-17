@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	var city;
-	var state;
+	var state = '';
 	var country;
 	var querydata;
 	var requesturl;
@@ -9,6 +9,10 @@ jQuery(document).ready(function($) {
 	var tempform = "C";
 	
 	$("#tempformF").hide(0, function(){});
+	
+	setTimeout(function() {
+		$( "#weatherautotemp" ).click();
+	}, 10)
 	
 	$("#tempformC").click(function() {
 		$("#tempformC").slideUp("medium", function(){
@@ -31,29 +35,26 @@ jQuery(document).ready(function($) {
 	});
 	
 	$( "#weatherautotemp" ).click(function() {
-		$( this ).fadeTo('medium', 0);
-		$( this ).next(".forecastdiv").fadeTo('medium', 0);
+		$('#conditionsdiv').fadeTo('medium', 0);
 		showWeatherReport("http://api.wunderground.com/api/" + apikey + "/geolookup/q/autoip.json", this.attributes.item(0).nodeValue);
 	});
 	
 	$( "#weatherziptemp" ).click(function() {
 		var zip=prompt("Enter a ZIP code","10001");
-		$( this ).fadeTo('medium', 0.01);
-		$( this ).next(".forecastdiv").fadeTo('medium', 0);
+		$('#conditionsdiv').fadeTo('medium', 0.01);
 		showWeatherReport("http://api.wunderground.com/api/" + apikey + "/geolookup/q/" + zip + ".json", this.attributes.item(0).nodeValue);
 	});
 	
 	$( "#weathercitytemp" ).click(function() {
 		var input=prompt("Enter <city>,<country> or <city>,<statecode> for USA","Paris,France");
 		var inputSplit = input.split(',');
-		$( this ).fadeTo('medium', 0.01);
-		$( this ).next(".forecastdiv").fadeTo('medium', 0);
+		$('#conditionsdiv').fadeTo('medium', 0.01);
 		showWeatherReport("http://api.wunderground.com/api/" + apikey + "/geolookup/q/" + inputSplit[1] + "/" + inputSplit[0] + ".json", this.attributes.item(0).nodeValue);
 	});
 	
 	$( "#weatherbktemp" ).click(function() {
-		$( this ).fadeTo('medium', 0.01);
-		$( this ).next(".forecastdiv").fadeTo('medium', 0);
+		$('#conditionsdiv').fadeTo('medium', 0.01);
+		$('#forecastdiv').fadeTo('medium', 0);
 		showWeatherReport("http://api.wunderground.com/api/" + apikey + "/geolookup/q/11222.json", this.attributes.item(0).nodeValue, '2013-11-28');
 	});
 	
@@ -86,8 +87,8 @@ jQuery(document).ready(function($) {
 				}
 			},
 			error: function() {
-				$('#' + $thishandle).html("<p>Could not load weather! - click to refresh</p>");
-				$( "#" + $thishandle ).fadeTo('medium', 1);
+				$('#conditionsdiv').html("<p>Could not load weather! - click to refresh</p>");
+				$('#conditionsdiv').fadeTo('medium', 1);
 			}
 		});
 	};
@@ -106,25 +107,27 @@ jQuery(document).ready(function($) {
 				}
 				humidity = parsed_json['current_observation']['relative_humidity'];
 				weather = parsed_json['current_observation']['weather'];
+				icon = parsed_json['current_observation']['icon_url'];
 				if ($thishandle == "weathercitytemp") {
-					$('#' + $thishandle).html("<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + country + ": " + temp + tempform + "<br>Humidity: " + humidity + ", " + weather + "</p>");
+					$('#conditionsdiv').html("<p><b>Current Conditions</b><br>" + city + ", " + country + ": " + temp + tempform + "<br>Humidity: " + humidity + ", " + weather + '</p>');
 				} else {
-					$('#' + $thishandle).html("<p><b>Current Conditions (click to refresh)</b><br>" + city + ", " + state + " (" + country + "): " + temp + tempform + "<br>Humidity: " + humidity + ", " + weather + "</p>");
+					$('#conditionsdiv').html("<p><b>Current Conditions</b><br>" + city + ", " + state + " (" + country + "): " + temp + tempform + "<br>Humidity: " + humidity + "<br><img height=30px width=30px src=\'" + icon + '\'>' + weather + '</p>');
 				}
-				$( "#" + $thishandle ).fadeTo('medium', 1);
+				$('#conditionsdiv').fadeTo('medium', 1);
 			},
 			error : function() {
-				$('#' + $thishandle).html("<p>Could not load weather! - click to refresh</p>");
-				$( "#" + $thishandle ).fadeTo('medium', 1);
+				$('#conditionsdiv').html("Could not load weather! - click to refresh");
+				$( '#conditionsdiv' ).fadeTo('medium', 1);
 			}
 		});
 	};
 	
 	function showForecast($thishandle) {
-		$('#'+$thishandle).next(".forecastdiv").innerHTML = "<p>Loading forecast...</p>";
+		$('#forecastdiv').innerHTML = "<p>Loading forecast...</p>";
 
-		var tmp_str = "";
-		console.log(querydata);
+		var tmp_str1 = "";
+		var tmp_str2 = "";
+		var tmp_str3 = "";
 		data = querydata['forecast']['simpleforecast']['forecastday'];
 		$.each(data, function(k,v) {
 			month = v['date']['monthname'];
@@ -137,10 +140,22 @@ jQuery(document).ready(function($) {
 				high = v['high']['fahrenheit'];
 				low = v['low']['fahrenheit'];
 			}
-			tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + low + " - " + high + tempform;
+			weather = v['conditions'];
+			icon = v['icon_url'];
+			tmp_str1 = tmp_str1 + "<br>" + weekday + ", " + month + " " + day;
+			tmp_str2 = tmp_str2 + "<br>" + low + " - " + high + tempform;
+			tmp_str3 = tmp_str3 + "<br><img height=20px width=20 src=\'" + icon + '\'>' + weather;
 		});
-		$("#" + $thishandle).next(".forecastdiv").html("<p><b>Forecast for " + city + "</b>" + tmp_str + "</p>");
-		$( "#" + $thishandle ).next(".forecastdiv").fadeTo('medium', 1);
+		if (state == '') {
+			$('#forecastdiv').html("<p><b>Forecast for " + city + ', ' + country + "</b>:");
+		} else {
+			$('#forecastdiv').html("<p><b>Forecast for " + city + ', ' + state + "</b>:");
+		}
+		
+		$('#forecastdivdate').html("<p>" + tmp_str1 + "</p>");
+		$('#forecastdivtemp').html("<p>" + tmp_str2 + "</p>");
+		$('#forecastdivcond').html("<p>" + tmp_str3 + "</p>");
+		$('#forecastdiv').fadeTo('medium', 1);
 			
 	};
 	
@@ -158,7 +173,7 @@ jQuery(document).ready(function($) {
 			day = v['date']['day'];
 			if (year==specyear && month==specmonth && day==specday) {
 				found = true;
-				if (tempform=="C") {
+				if (tempform=='C') {
 					high = v['high']['celsius'];
 					low = v['low']['celsius'];
 				} else {
@@ -169,11 +184,11 @@ jQuery(document).ready(function($) {
 			}
 		});
 		if (found) {
-			$("#" + $thishandle).next(".forecastdiv").html("<p><b>Forecast for " + city + "</b>" + tmp_str + "</p>");
-			$( "#" + $thishandle ).next(".forecastdiv").fadeTo('medium', 1);
+			$('#forecastdiv').html("<p><b>Forecast for " + city + "</b>" + tmp_str + "</p>");
+			$('#forecastdiv').fadeTo('medium', 1);
 		} else {
-			$("#" + $thishandle).next(".forecastdiv").html("<p><b>Forecast for " + city + "</b><br>" + specyear + "-" + specmonth + "-" + specday + " Not available!</p>");
-			$( "#" + $thishandle ).next(".forecastdiv").fadeTo('medium', 1);
+			$('#forecastdiv').html("<p><b>Forecast for " + city + "</b><br>" + specyear + "-" + specmonth + "-" + specday + " Not available!</p>");
+			$('#forecastdiv').fadeTo('medium', 1);
 		}
 	};
 });
