@@ -10,6 +10,24 @@ jQuery(document).ready(function($) {
 	var hist = [];
 	var colors = ['red', 'green', 'black'];
 	var offset = new Date().getTimezoneOffset()/60;
+	var curLen = 1;
+	
+	$("p.hover").hover(function(){
+		$( this ).stop().animate({color:"red"},0);
+	}, function() {
+		$( this ).stop().animate({color:"black"},0);
+	});
+	
+	$('.hover').click(function() {
+		$(this).siblings('.hover').css('border-style', 'outset');
+		$(this).css('border-style', 'inset');
+		curLen = this.attributes['id'].nodeValue;
+		$.when($('#placeholderHourly').fadeTo('medium', 0.01))
+		.then(function() {
+			displayHourlyPlot(curLen, 'placeholderHourly');
+			$('#placeholderHourly').fadeTo('medium', 1);
+		});
+	});
 	
 	$.when(getCurrentPrices()).done(function() {
 		displayPrices(oldprices, newprices);
@@ -18,13 +36,13 @@ jQuery(document).ready(function($) {
 	$.when(getHistoricalPrices()).done(function() {
 		displayHistPlot(hist_24_file, 'placeholder24');
 		displayHistPlot(hist_AT_file, 'placeholderAT');
-		displayHourlyPlot(1, 'placeholderHourly');
+		displayHourlyPlot(curLen, 'placeholderHourly');
 	});
 	
 	setInterval( function() {
 		$.when(getCurrentPrices()).done(function() {
 			displayPrices(oldprices, newprices);
-			displayHourlyPlot(1, 'placeholderHourly');
+			displayHourlyPlot(curLen, 'placeholderHourly');
 		});
 	}, 10000);
 	
