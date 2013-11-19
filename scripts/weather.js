@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 	
 	setTimeout(function() {
 		$( "#weatherautotemp" ).click();
-	}, 10)
+	}, 10);
 	
 	$("#tempformC").click(function() {
 		$("#tempformC").slideUp("medium", function(){
@@ -171,6 +171,7 @@ jQuery(document).ready(function($) {
 			year = v['date']['year'];
 			month = v['date']['month'];
 			day = v['date']['day'];
+			weekday = v['date']['weekday'];
 			if (year==specyear && month==specmonth && day==specday) {
 				found = true;
 				if (tempform=='C') {
