@@ -170,6 +170,7 @@ jQuery(document).ready(function($) {
 		$.each(data, function(k,v) {
 			year = v['date']['year'];
 			month = v['date']['month'];
+			monthname = v['date']['monthname'];
 			day = v['date']['day'];
 			weekday = v['date']['weekday'];
 			if (year==specyear && month==specmonth && day==specday) {
@@ -181,7 +182,9 @@ jQuery(document).ready(function($) {
 					high = v['high']['fahrenheit'];
 					low = v['low']['fahrenheit'];
 				}
-				tmp_str = tmp_str + "<br>" + weekday + ", " + month + " " + day + ": " + low + " - " + high + tempform;
+				weather = v['conditions'];
+				icon = v['icon_url'];
+				tmp_str = tmp_str + "<br>" + weekday + ", " + monthname + " " + day + ": " + low + " - " + high + tempform + ', ' + '<img height=20px width=20 src=\'' + icon + '\'>' + weather;
 			}
 		});
 		if (found) {
