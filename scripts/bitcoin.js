@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 				timestamp[1] = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
 			},
 			error : function(message,b,c) {
-				alert(c);
+				console.log(message);
 			}
 		});
 	}
@@ -97,7 +97,7 @@ jQuery(document).ready(function($) {
 				hist_AT_file = data['all_time'];
 			},
 			error : function(message, b, c) {
-				alert(c);
+				console.log(message);
 			}
 		});
 	}
@@ -135,7 +135,7 @@ jQuery(document).ready(function($) {
 				});
 			},
 			error : function(message, a, b) {
-				console.log(b);
+				console.log(message);
 			}
 		});
 	};
@@ -180,7 +180,7 @@ jQuery(document).ready(function($) {
 				});
 			},
 			error : function(message, a, b) {
-				alert(c);
+				console.log(message);
 			}
 		});
 	};
