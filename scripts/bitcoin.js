@@ -83,7 +83,8 @@ jQuery(document).ready(function($) {
 				timestamp[1] = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
 			},
 			error : function(message,b,c) {
-				console.log(message);
+				$('#tradeprice').html('BitcoinAverage.com is down.');
+				$('title').html('BitcoinAverage.com is down.');
 			}
 		});
 	}
