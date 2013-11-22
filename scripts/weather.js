@@ -114,6 +114,7 @@ jQuery(document).ready(function($) {
 					$('#conditionsdiv').html("<p><b>Current Conditions</b><br>" + city + ", " + state + " (" + country + "): " + temp + tempform + "<br>Humidity: " + humidity + "<br><img height=30px width=30px src=\'" + icon + '\'>' + weather + '</p>');
 				}
 				$('#conditionsdiv').fadeTo('medium', 1);
+				$('title').html(temp + tempform + ', ' + weather);
 			},
 			error : function() {
 				$('#conditionsdiv').html("Could not load weather! - click to refresh");

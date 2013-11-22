@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
 	function displayPrices(prices, newprices) {
 		k = (newprices[0] > oldprices[0]) ? 1 : (newprices[0] == oldprices[0] ? 2 : 0);
 		$('#tradeprice').html('<td>Trade price: </td><td><font color=' + colors[k] + '>$' + newprices[0] + '</font></td>');
-		$('title').html(timestamp[1] + ' - $' + newprices[0]);
+		$('title').html('$' + newprices[0]);
 		
 		k = newprices[1] > oldprices[1] ? 1 : (newprices[1] == oldprices[1] ? 2 : 0);
 		$('#bidprice').html('<td>Bid price: </td><td><font color=' + colors[k] + '>$' + newprices[1] + '</font></td>');
