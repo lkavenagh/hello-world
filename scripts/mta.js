@@ -5,7 +5,8 @@ var apikey = '01165445e3b0666d030436b417ef1aec';
 jQuery(document).ready(function($) {
 	$.ajax({
 		url : proxyurl,
-		type: 'POST',
+		type : 'POST',
+		dataType : 'xml',
 		data: {
 			address: requesturl
 		},
