@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 	$.ajax({
 		url : proxyurl,
 		type : 'POST',
-		dataType : 'xml',
+		dataType : 'text',
 		data: {
 			address: requesturl
 		},
