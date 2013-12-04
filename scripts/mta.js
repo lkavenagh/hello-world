@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 					col = '<font color=\'green\'>';
 					statusStr = $(this).find('status').text() + '</font>';
 				}
-				$('#mtafeed').html($('#mtafeed').html() + name + ': ' + col + statusStr + '<br>');
+				$('#mtafeed').html($('#mtafeed').html() + '<tr><td>' + name + '</td><td>' + col + statusStr + '</td></tr>');
 			});
 		},
 		error : function(message, a, b) {
