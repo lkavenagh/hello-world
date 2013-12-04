@@ -43,6 +43,10 @@ p.hover{
 	cursor:pointer;
 }
 
+div.hover{
+	cursor:pointer;
+}
+
 p.button{
 	display:inline;
 	border-style:outset;
@@ -50,6 +54,14 @@ p.button{
 }
 
 p.app{
+	opacity:1;
+	display:none;
+}
+
+p.mtastatus{
+	font-size:100%;	
+}
+.mtastatusdesc{
 	opacity:1;
 	display:none;
 }
@@ -139,8 +151,21 @@ table.btcprices{
 table.mtafeed{
 	font-size:110:;
 	border-spacing:50 0;
+	table-layout:fixed;
 }
 
+table.mtafeed td.col1{
+	width: 5em;
+	height: 20;
+	text-align:center;
+	font-weight:bold;
+}
+
+table.mtafeed td.col2{
+	width: 25em;
+	height: 20;
+	overflow:hidden;
+}
 #map-canvas {
 	height: 50%;
 	width: 75%;
