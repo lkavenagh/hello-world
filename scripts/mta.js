@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 		url : proxyurl,
 		dataType : 'text',
 		data: {
-			requrl: requesturl + $.param(requestData)
+			requrl: requesturl
 		},
 		success : function(data) {
 			console.log(data);
