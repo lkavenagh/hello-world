@@ -136,6 +136,11 @@ table.btcprices{
 	border-spacing:50 0;
 }
 
+table.mtafeed{
+	font-size:110:;
+	border-spacing:50 0;
+}
+
 #map-canvas {
 	height: 50%;
 	width: 75%;

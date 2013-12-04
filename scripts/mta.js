@@ -11,7 +11,18 @@ jQuery(document).ready(function($) {
 		},
 		success : function(data) {
 			xmlDoc = $.parseXML( data );
-			console.log($(xmlDoc).find('service').find('timestamp').text());
+			$('#mtafeed').html('<p>' + $(xmlDoc).find('service').find('timestamp').text() + '</p><br>');
+			$(xmlDoc).find('service').find('subway').find('line').each(function() {
+				name = $(this).find('name').text();
+				if($(this).find('status').text() != 'GOOD SERVICE') {
+					col = '<font color=\'red\'>';
+					statusStr = $(this).find('status').text() + ' - ' + $(this).find('text').text() + '</font>';
+				} else {
+					col = '<font color=\'green\'>';
+					statusStr = $(this).find('status').text() + '</font>';
+				}
+				$('#mtafeed').html($('#mtafeed').html() + name + ': ' + col + statusStr + '<br>');
+			});
 		},
 		error : function(message, a, b) {
 			console.log(b);

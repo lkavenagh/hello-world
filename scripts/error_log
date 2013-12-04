@@ -1,0 +1,2 @@
+[04-Dec-2013 17:26:08 UTC] PHP Warning:  file_get_contents() [<a href='function.file-get-contents'>function.file-get-contents</a>]: Filename cannot be empty in /home/kavenagh/public_html/scripts/mta.php on line 2
+[04-Dec-2013 17:26:40 UTC] PHP Warning:  file_get_contents() [<a href='function.file-get-contents'>function.file-get-contents</a>]: Filename cannot be empty in /home/kavenagh/public_html/scripts/mta.php on line 2
