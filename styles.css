@@ -171,3 +171,17 @@ table.mtafeed td.col2{
 	width: 75%;
 	margin:0 auto;
 }
+
+div.infowindow-div {
+	min-width: 300;
+	min-height: 75;
+}
+
+#pac-input {
+	width: 400px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	font-size: 15px;
+	height: 32px;
+	margin-top: 16px;
+}
