@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
 			if (number>=count-1) {
 				number = 0;
 			};
-		}, 1000);
+		}, 5000);
     });
 });
 
