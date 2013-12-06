@@ -5,7 +5,7 @@ var infowindow;
 
 jQuery(document).ready(function($) {
 	loadScript();
-
+	
 	$( '#addresssubmit' ).click(function( event ) {
 		clearMarkers();
 		centerOnAddress(document.getElementById('address').value, true);
