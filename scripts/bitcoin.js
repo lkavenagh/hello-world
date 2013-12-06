@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 	var colors = ['red', 'green', 'black'];
 	var offset = new Date().getTimezoneOffset()/60;
 	var curLen = 1;
-	
+
 	$('#1').css('border-style', 'inset');
 	
 	$("p.hover").hover(function(){
