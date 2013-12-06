@@ -152,6 +152,7 @@ table.mtafeed{
 	font-size:110:;
 	border-spacing:50 0;
 	table-layout:fixed;
+	display: inline-block;
 }
 
 table.mtafeed td.col1{
