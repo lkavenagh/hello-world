@@ -10,33 +10,29 @@ xml_parser_free($p);
 $delayedlines = array();
 $delayedtext = array();
 
-foreach ($vals as $xml_elem) {
+for ($i = 0; $i < count($vals); $i++) {
+	$xml_elem = $vals[$i];
 	$x_tag=$xml_elem['tag'];
 	$x_level=$xml_elem['level'];
 	$x_type=$xml_elem['type'];
 	$x_value=$xml_elem['value'];
-	if (strlen(trim($x_value))>0) {
 		if ($x_tag == "NAME") {$thisname = trim($x_value);};
 		if ($x_tag == "TEXT") {$thistext = trim($x_value);};
-		if ($x_tag == "STATUS") {
-			$thisstatus = trim($x_value);
+		if ($x_tag == "STATUS") { $thisstatus = trim($x_value); $thistext = "";};
+		if (!empty($thistext)) {
 			if ($thisstatus == "DELAYS") {
 				$delayedlines[] = $thisname;
 				$delayedtext[] = $thistext;
+				$thisstatus = "";
 			}
 		}
-	}
 }
 print_r($delayedlines);
 
-foreach ($delayedlines as $lineName) {
+for ($i=0; $i < count($delayedlines); $i++) {
+	$lineName = $delayedlines[$i];
 	$pass = 'XL_?ngy-aur_';
-	$ip = $_SERVER['REMOTE_ADDR'];
-	$caller = explode("/",$_SERVER['HTTP_REFERER']);
-	$caller = end($caller);
-	if (empty($caller)) {
-		$caller = "index.html";
-	}
+
 	$con = pg_connect("host=127.0.0.1 port=5432 dbname=kavenagh_visitors user=kavenagh_luke password=" . $pass);
 	$query = "SELECT \"EmailAddress\" 
 		FROM \"public\".\"MTAAlertEmails\" AS a JOIN \"MTALineNames\" AS b 
@@ -55,13 +51,18 @@ foreach ($delayedlines as $lineName) {
 	
 		$email = $row[0];
 		$subject = "MTA update: The " . $lineName . " line is experiencing delays";
+		$body = $delayedtext[$i];
 	
 		$port = "465";
 		$host = "ssl://mail.kavenagh.com";
-		$username = "luke@kavenagh.com";
+		$username = "mtaalerts@kavenagh.com";
 		$password = "Pector88";
 	
-		$headers = array('From' => "MTA Alert <luke@kavenagh.com>", 'To' => $email, 'Subject' => $subject);
+		$headers = array('From' => "MTA Alert <mtaalerts@kavenagh.com>",
+			'To' => $email,
+			'Subject' => $subject,
+			'MIME-Version' => '1.0',
+			'Content-type' => 'text/html; charset=iso-8859-1');
 		$smtp = Mail::factory('smtp', 
 			array('host' => $host,
 			'port' => $port,

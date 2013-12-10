@@ -1,4 +1,0 @@
-[10-Dec-2013 03:14:13 UTC] PHP Warning:  pg_query() [<a href='function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at or near &quot;)&quot;
-LINE 1: ...ilAddress&quot;, &quot;MTALineNamesID&quot;) VALUES ('luke@kavenagh.com', )
-                                                                      ^ in /home/kavenagh/public_html/scripts/registeremail.php on line 8
-[10-Dec-2013 13:11:34 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/kavenagh/public_html/scripts/registeremail.php on line 16
