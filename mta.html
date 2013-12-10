@@ -14,6 +14,21 @@
 		
 		<div class="section-break"> <br> </div>
 		<br>
+		<form id="email-form">
+		<p> Enter email to sign up for delay alerts (max 1 email per hour): 
+		<input id="email" type="text"> 
+		<span id="dropdownlines"> </span>
+		<input type="submit">
+		<span id="confirmtext" class="confirmtext"> </span>
+		</p>
+		</form>
+		<form id="unsubscribe-form">
+		<p> Enter email to unsubscribe from all alerts:
+		<input id="unsubscribe" type="text"> 
+		<input type="submit">
+		<span id="unsubscribetext" class="confirmtext"> </span>
+		</p>
+		</form>
 		<p class = 'footer'> Click on delays for more detail </p>	
 		<table class="mtafeed" id="subwayfeed"> </table>
 		<table class="mtafeed" id='lirrfeed'> </table>
@@ -33,7 +48,6 @@
 		
 		<script src="./scripts/jquery-1.10.2.min.js"></script>
 		<script src="./scripts/mta.js"></script>
-		<script src="./scripts/mtaalerts.js"></script>
 		<script src="./scripts/recordip.js"></script>
 
 		<p class='footer'>Visitors to domain: <span id="counter_all"> </span></p>

@@ -12,6 +12,38 @@ jQuery(document).ready(function($) {
 		getMTAFeed();
 	}, 60000);
 	
+	$.ajax({
+		url: './scripts/getlines.php',
+		dataType: 'text',
+		success: function(data){
+			$('#dropdownlines').html(data);
+		}
+	});
+
+	$('#unsubscribe-form').submit(function() {
+		$.ajax({
+			url: './scripts/unsubscribeemail.php',
+			type: 'POST',
+			data: {email: $('#unsubscribe').val()},
+			success: function(data){
+				$('#unsubscribetext').html(data);
+			}
+		});
+		event.preventDefault();
+	})
+
+	$('#email-form').submit(function() {
+		$.ajax({
+			url: './scripts/registeremail.php',
+			type: 'POST',
+			data: {email: $('#email').val(), line: $('#dropdownlines :selected').text()},
+			success: function(data){
+				$('#confirmtext').html(data);
+			}
+		});
+		event.preventDefault();
+	})
+
 	function getMTAFeed() {
 		$.ajax({
 			url : proxyurl,

@@ -184,3 +184,19 @@ div.infowindow-div {
 	height: 32px;
 	margin-top: 16px;
 }
+
+.input {
+	border: 2px solid #dadada;
+	border-radius: 7px;
+}
+
+.input:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+.confirmtext {
+	text-color: green;
+	font-size: 50%;
+}
