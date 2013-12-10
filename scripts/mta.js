@@ -1,6 +1,6 @@
+var apikey = '01165445e3b0666d030436b417ef1aec';
 var proxyurl = './scripts/proxy.php';
 var requesturl = 'http://web.mta.info/status/serviceStatus.txt';
-var apikey = '01165445e3b0666d030436b417ef1aec';
 
 jQuery(document).ready(function($) {
 	$('.mtafeed').on('click', '.hover.mtastatus', function() {
@@ -27,7 +27,7 @@ jQuery(document).ready(function($) {
 				updateStatusTable('MetroNorth', '#mnfeed');
 			},
 			error : function(message, a, b) {
-				$('#mtafeed').append('<p> MTA API is down </p>');
+				$('#subwayfeed').append('<p> MTA API is down </p>');
 			}
 		});
 	}

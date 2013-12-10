@@ -6,9 +6,9 @@ $caller = explode("/",$_SERVER['HTTP_REFERER']);
 if (empty($caller)) {
 	$caller = "index.html";
 }
-$con = mysqli_connect("localhost", "kavenagh_luke", $pass, "kavenagh_visitors");
-$query = "INSERT INTO `Visitors` (`TimeStamp`, `PageName`, `IPAddress`) VALUES ('" . $date . "'," . "'" . $caller . "'," . "INET_ATON('" . $_SERVER['REMOTE_ADDR'] . "'))";
+$con = pg_connect("host=127.0.0.1 port=5432 dbname=kavenagh_visitors user=kavenagh_luke password=" . $pass);
+$query = "INSERT INTO \"public\".\"Visitors\" (\"TimeStamp\", \"PageName\", \"IPAddress\") VALUES ('" . $date . "'," . "'" . $caller . "'," . "'" . $_SERVER['REMOTE_ADDR'] . "')";
 echo $query;
-$result = mysqli_query($con, $query);
-mysqli_close($con);
+$result = pg_query($con, $query);
+pg_close($con);
 ?>
